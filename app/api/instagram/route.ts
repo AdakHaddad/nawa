@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import puppeteer, { Browser, Page } from "puppeteer"; // Use puppeteer-core and @sparticuz/chromium in production
 import { cache } from "react";
+import { siteConfig } from "@/app/config/site";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -50,7 +51,7 @@ const cachedScrape = cache(async () => {
       }
     }
 
-    await navigateWithRetry(page, "https://www.instagram.com/nawa.fuku/");
+    await navigateWithRetry(page, siteConfig.contact.instagram.sourceUrl);
     await delay(5000);
     await page.mouse.move(100, 100);
     await page.evaluate(async () => {
@@ -68,7 +69,7 @@ const cachedScrape = cache(async () => {
     const profilePicUrl = await page.evaluate(() => {
       const img = document.querySelector(
         'header img, img[alt*="profile picture"], div._aa_m img'
-      );
+      ) as HTMLImageElement | null;
       return img ? `/api/image-proxy?url=${encodeURIComponent(img.src)}` : null;
     });
 
@@ -79,8 +80,9 @@ const cachedScrape = cache(async () => {
       );
       console.log("Found post imgs:", postImgs.length);
       postImgs.forEach((img) => {
-        const src = img.getAttribute("src");
-        const alt = img.getAttribute("alt") || "Instagram post";
+        const imgElement = img as HTMLImageElement;
+        const src = imgElement.src;
+        const alt = imgElement.getAttribute("alt") || "Instagram post";
         if (src && (src.includes("cdninstagram") || src.includes("fbcdn.net"))) {
           images.push({
             imageUrl: `/api/image-proxy?url=${encodeURIComponent(src)}`,

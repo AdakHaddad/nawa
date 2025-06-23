@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Background from "./components/Background";
 import WhatsAppButton from "./components/WhatsAppButton";
+import { siteConfig } from "./config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,40 +16,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nawa Fuku | Dessert Jar & Lebaran Cookies in Jakarta",
-  description:
-    "Nawa Fuku offers delicious dessert jars and Lebaran cookies (kue kering) in Jakarta, Indonesia. Real pictures! Contact via WhatsApp.",
-  keywords: [
-    "Nawa Fuku",
-    "dessert jar",
-    "Lebaran cookies",
-    "kue kering",
-    "Jakarta sweets",
-    "buy cookies Jakarta",
-    "WA order desserts",
-  ],
+  title: siteConfig.metadata.title,
+  description: siteConfig.metadata.description,
+  keywords: siteConfig.metadata.keywords,
   openGraph: {
-    title: "Nawa Fuku | Dessert Jar & Lebaran Cookies",
-    description:
-      "Selling sweets in Jakarta! Try our dessert jars and Lebaran cookies. Contact us via WhatsApp.",
+    title: siteConfig.metadata.title,
+    description: siteConfig.metadata.description,
     type: "website",
-    locale: "en_US",
-    url: "https://nawafuku.vercel.app/",
+    locale: "id_ID",
+    url: siteConfig.metadata.siteUrl,
     images: [
       {
-        url: "https://nawafuku.vercel.app/profile-pic.jpg", // Replace with actual image URL
+        url: `${siteConfig.metadata.siteUrl}/profile-pic.jpg`,
         width: 800,
         height: 600,
-        alt: "Nawa Fuku Dessert",
+        alt: `${siteConfig.business.name} - ${siteConfig.business.tagline}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nawa Fuku | Dessert Jar & Lebaran Cookies",
-    description:
-      "Selling delicious sweets in Jakarta! Try our dessert jars and Lebaran cookies. Order via WhatsApp.",
-    images: ["profile.jpg"], // Replace with actual image URL
+    title: siteConfig.metadata.title,
+    description: siteConfig.metadata.description,
+    images: ["profile.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -61,13 +51,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="id">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Background />
         {children}
         <WhatsAppButton />

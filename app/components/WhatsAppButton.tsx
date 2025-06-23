@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { siteConfig } from '@/app/config/site';
 
 export default function WhatsAppButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,9 +26,9 @@ export default function WhatsAppButton() {
   return (
     <div className={`fixed bottom-6 right-6 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'} z-50`}>
       <a
-        href={`https://wa.me/6285694481583?text=${encodeURIComponent(
-            "Assalamualaikum, saya ingin memesan kue. Apakah ada yang tersedia?"
-              )}`}
+        href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
+          siteConfig.messages.whatsapp
+        )}`}
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-2 bg-green-500 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-600 transition-colors group"

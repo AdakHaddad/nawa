@@ -1,3 +1,5 @@
+import { siteConfig } from "@/app/config/site";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white mt-8">
@@ -7,20 +9,20 @@ export default function Footer() {
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
             <div className="space-y-2">
               <a
-                href="https://wa.me/6285694481583"
+                href={`https://wa.me/${siteConfig.contact.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-green-400 transition"
               >
-                <span>+62 856-9448-1583</span>
+                <span>+{siteConfig.contact.whatsapp.replace(/^62/, "62 ")}</span>
               </a>
               <a
-                href="https://instagram.com/nawa.fuku"
+                href={siteConfig.contact.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-pink-400 transition"
               >
-                <span>@nawa.fuku</span>
+                <span>@{siteConfig.contact.instagram.handle}</span>
               </a>
             </div>
           </div>
@@ -28,15 +30,13 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-semibold mb-4">About</h3>
             <p className="text-gray-400">
-              Nawa Fuku brings you delightful homemade treats in Jakarta. 
-              We specialize in traditional kue kering and freshly baked cheese cakes, 
-              made with love and the finest ingredients.
+              {siteConfig.business.description}
             </p>
           </div>
         </div>
         
         <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Nawa Fuku. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {siteConfig.business.name}. All rights reserved.</p>
         </div>
       </div>
     </footer>

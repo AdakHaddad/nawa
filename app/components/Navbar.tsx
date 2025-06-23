@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { siteConfig } from "@/app/config/site";
 
 interface InstagramData {
   profilePicUrl: string;
@@ -37,22 +38,22 @@ export default function Navbar() {
             <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-blue-500 ring-offset-2">
               <Image
                 src={profileData.profilePicUrl || "/default-profile.png"}
-                alt="Profile Picture"
+                alt={`${siteConfig.business.name} Profile Picture`}
                 fill
                 className="object-cover"
               />
             </div>
           )}
           <div className="flex flex-col">
-            <span className="text-xl font-semibold text-blue-900">Nawa Fuku</span>
-            <span className="text-sm text-gray-600">Kue Kering & Cheese Cake</span>
+            <span className="text-xl font-semibold text-blue-900">{siteConfig.business.name}</span>
+            <span className="text-sm text-gray-600">{siteConfig.business.tagline}</span>
           </div>
         </div>
 
         {/* Right: WhatsApp Button */}
         <a
-          href={`https://wa.me/6285694481583?text=${encodeURIComponent(
-            "Assalamualaikum, saya ingin memesan kuenya. Apakah ada yang tersedia?"
+          href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
+            siteConfig.messages.whatsapp
           )}`}
           target="_blank"
           rel="noopener noreferrer"
