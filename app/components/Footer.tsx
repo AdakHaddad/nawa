@@ -1,4 +1,3 @@
-
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white mt-8">
@@ -29,9 +28,9 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-semibold mb-4">About</h3>
             <p className="text-gray-400">
-              Nawa Fuku brings the essence of Japanese fashion to Indonesia. 
-              We offer a carefully selected collection of authentic Japanese clothing 
-              and accessories.
+              Nawa Fuku brings you delightful homemade treats in Jakarta. 
+              We specialize in traditional kue kering and freshly baked cheese cakes, 
+              made with love and the finest ingredients.
             </p>
           </div>
         </div>

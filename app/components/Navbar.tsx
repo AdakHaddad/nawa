@@ -20,41 +20,47 @@ export default function Navbar() {
         setProfileData({ profilePicUrl: data.profilePicUrl });
         setLoading(false);
       } catch (error) {
-        console.error("Navbar error:", error); // ✅ Log the error instead of leaving it unused
+        console.error("Navbar error:", error);
       }
     }
     fetchProfileData();
   }, []);
 
   return (
-    <nav className="bg-white text-gray-900 space-x-7 px-6 flex justify-between items-center shadow-md">
-      {/* Left: Profile Picture & Title */}
-      <div className="flex items-center space-x-4">
-        {loading ? (
-          <div className="w-auto rounded-full bg-gray-300 animate-pulse" />
-        ) : (
-          <Image
-            src={profileData.profilePicUrl || "/default-profile.png"}
-            alt="Profile Picture"
-            width={50}
-            height={50}
-            className="rounded-full"
-          />
-        )}
-        <span className="text-xl font-semibold">nawa.fuku</span>
-      </div>
+    <nav className="w-full bg-white/80 backdrop-blur-sm shadow-lg border-b border-white/20">
+      <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+        {/* Left: Profile Picture & Title */}
+        <div className="flex items-center space-x-4">
+          {loading ? (
+            <div className="w-12 h-12 rounded-full bg-gray-300 animate-pulse" />
+          ) : (
+            <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-blue-500 ring-offset-2">
+              <Image
+                src={profileData.profilePicUrl || "/default-profile.png"}
+                alt="Profile Picture"
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
+          <div className="flex flex-col">
+            <span className="text-xl font-semibold text-blue-900">Nawa Fuku</span>
+            <span className="text-sm text-gray-600">Kue Kering & Cheese Cake</span>
+          </div>
+        </div>
 
-      {/* Right: WhatsApp Button */}
-      <a
-        href={`https://wa.me/6285694481583?text=${encodeURIComponent(
-          "Permisi MinWa apakah Nawa Fuku masih tersedia?"
-        )}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-white text-green-500 px-4 py-2 rounded-lg shadow-md hover:bg-slate-50 transition"
-      >
-        Order Now
-      </a>
+        {/* Right: WhatsApp Button */}
+        <a
+          href={`https://wa.me/6285694481583?text=${encodeURIComponent(
+            "Assalamualaikum, saya ingin memesan kuenya. Apakah ada yang tersedia?"
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition-colors"
+        >
+          Order Now
+        </a>
+      </div>
     </nav>
   );
 }
